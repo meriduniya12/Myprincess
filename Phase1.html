@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🌌 Hrishi & Nandini's Dreamworld</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {
+      font-family: 'Segoe UI', cursive;
+      background: linear-gradient(to bottom, #0a0022, #000);
+      height: 100vh;
+      overflow: hidden;
+      color: white;
+    }
+
+    .floating-title {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 22px;
+      color: #ffccff;
+      animation: glow 2s ease-in-out infinite alternate;
+      z-index: 2;
+    }
+
+    @keyframes glow {
+      from { opacity: 0.5; }
+      to { opacity: 1; }
+    }
+
+    .firefly {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: yellow;
+      border-radius: 50%;
+      animation: fly 12s linear infinite;
+    }
+
+    @keyframes fly {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(100vw, 100vh); }
+    }
+
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+    }
+
+    .hug-btn {
+      background: #ff66aa;
+      border: none;
+      padding: 15px 30px;
+      font-size: 20px;
+      color: white;
+      border-radius: 30px;
+      box-shadow: 0 0 20px #ff99cc;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .hug-btn:active {
+      transform: scale(1.1);
+      box-shadow: 0 0 40px #ff99cc;
+    }
+
+    .hug-message {
+      margin-top: 20px;
+      font-size: 20px;
+      display: none;
+      animation: fadeIn 2s forwards;
+      color: #ffddee;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .memory-bubble {
+      position: absolute;
+      background: rgba(255,255,255,0.1);
+      padding: 15px 20px;
+      border-radius: 30px;
+      box-shadow: 0 0 10px #ff99cc;
+      font-size: 14px;
+      animation: floatBubble 20s infinite ease-in-out;
+    }
+
+    @keyframes floatBubble {
+      0% {transform: translateY(0);}
+      50% {transform: translateY(-30px);}
+      100% {transform: translateY(0);}
+    }
+
+    .proposal {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+
+    .proposal button {
+      padding: 12px 24px;
+      font-size: 18px;
+      background: gold;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 0 15px gold;
+      cursor: pointer;
+    }
+
+    .ring-msg {
+      display: none;
+      margin-top: 15px;
+      font-size: 22px;
+      color: #ffeeff;
+      animation: ringShow 1s ease-in;
+    }
+
+    @keyframes ringShow {
+      from {transform: scale(0);}
+      to {transform: scale(1);}
+    }
+
+    .flipbook {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      font-size: 14px;
+      background: #333;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      border: 2px solid #fff;
+    }
+
+    audio { display: none; }
+  </style>
+</head>
+<body>
+
+<audio autoplay loop>
+  <source src="https://www.fesliyanstudios.com/play-mp3/387" type="audio/mpeg">
+</audio>
+
+<div class="floating-title">🌌 Welcome to Our Dreamworld, Meri Pyari si jaan 💖</div>
+
+<!-- Fireflies -->
+<script>
+  for (let i = 0; i < 40; i++) {
+    const fly = document.createElement('div');
+    fly.className = 'firefly';
+    fly.style.top = Math.random() * 100 + 'vh';
+    fly.style.left = Math.random() * 100 + 'vw';
+    fly.style.animationDuration = (8 + Math.random() * 5) + 's';
+    document.body.appendChild(fly);
+  }
+</script>
+
+<!-- Hug Animation -->
+<div class="center">
+  <button class="hug-btn" onmousedown="showHug()">🫂 Hold to Feel the Hug</button>
+  <div class="hug-message" id="hugMsg">🤗 I feel your warmth... always close to my heart, Meri Pyari si Jaan 💘</div>
+</div>
+
+<!-- Floating Memories -->
+<div class="memory-bubble" style="top: 20%; left: 10%;" onclick="show()">📅 15 Jan – First Day</div>
+
+<div class="memory-bubble" style="top: 35%; right: 12%;">💬 Confession Night</div>
+<div class="memory-bubble" style="top: 55%; left: 25%;">🎁 First Surprise</div>
+<div class="memory-bubble" style="top: 70%; right: 18%;">🫂 Hug Moment</div>
+
+<!-- Proposal -->
+<div class="proposal">
+  <button onclick="showRing()">💍 Will You Marry Me?</button>
+  <div class="ring-msg" id="ringMsg">💍 Yes! Always Yours, Hrishi 💘</div>
+</div>
+<p id="me"  class="hug-message" top:25%"></p>
+<!-- Flipbook Link -->
+<div class="flipbook" onclick="goToDiary()">📖 Open Book of Forever</div>
+
+<script>
+  function showHug() {
+    document.getElementById("hugMsg").style.display = "block";
+  }
+
+  function showRing() {
+    document.getElementById("ringMsg").style.display = "block";
+  }
+
+  function goToDiary() {
+    alert("📖 Opening Love Diary...for my Princess");
+   window.location.href = "phase2.html";
+  }
+  function show(){
+    alert("Meri kismat us din meharbaan ho gayi kyu meri jaan mil gayi")
+  }
+</script>
+
+</body>
+</html>

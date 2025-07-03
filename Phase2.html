@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📖 Book of Forever – Hrishi 💘 Nandini</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(to right, #100021, #1a0030);
+      font-family: 'Segoe UI', cursive;
+      overflow: hidden;
+      color: white;
+    }
+
+    .book-container {
+      width: 80%;
+      margin: 50px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .page {
+      background: #fffafc;
+      color: #000;
+      width: 45%;
+      height: 300px;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #ffb3da;
+      overflow: auto;
+      font-size: 18px;
+      line-height: 1.6;
+      font-family: 'Georgia', serif;
+      position: relative;
+    }
+
+    .page::after {
+      content: '';
+      position: absolute;
+      right: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 80%;
+      width: 5px;
+      background: #ff99cc;
+      border-radius: 5px;
+    }
+
+    .controls {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .controls button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 0 10px;
+      background: #ff66cc;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .rose {
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      font-size: 20px;
+      animation: fall 8s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100px); }
+      100% { transform: translateY(100vh); }
+    }
+
+    .puzzle {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .puzzle button {
+      padding: 12px 24px;
+      font-size: 18px;
+      background: gold;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 15px gold;
+    }
+
+    .proposal-msg {
+      margin-top: 20px;
+      font-size: 22px;
+      display: none;
+      animation: fadeIn 2s forwards;
+      color: #ffeeff;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    audio { display: none; }
+  </style>
+</head>
+<body>
+
+<audio autoplay loop>
+  <source src="https://www.fesliyanstudios.com/play-mp3/387" type="audio/mpeg">
+</audio>
+
+<!-- Floating Roses -->
+<script>
+  for(let i = 0; i < 20; i++) {
+    const rose = document.createElement('div');
+    rose.className = 'rose';
+    rose.innerHTML = "🌹";
+    rose.style.left = Math.random() * 100 + "vw";
+    rose.style.animationDuration = (5 + Math.random() * 5) + "s";
+    document.body.appendChild(rose);
+  }
+</script>
+
+<div class="book-container">
+  <div class="page" id="leftPage"></div>
+  <div class="page" id="rightPage"></div>
+</div>
+
+<div class="controls">
+  <button onclick="prevPage()">⬅️ Previous</button>
+  <button onclick="nextPage()">Next ➡️</button>
+</div>
+
+<!-- Puzzle Proposal -->
+<div class="puzzle">
+  <button onclick="showProposal()">🧩 Complete the Puzzle of My Heart</button><br><br><br>
+  <button onclick="show()">Check Out How much I Love You </button>
+  <div class="proposal-msg" id="proposalMsg">💍 Will You Marry Me, Nandini? — Hrishi 💖</div>
+</div>
+
+<script>
+  const pages = [
+    "Mere dil ka har tukda sirf tumse judta hai, Meri Jaan. 💖",
+    " Har din tumse baat na ho to lagta hai kuchh adhura hai... 🌙",
+    " Tum meri zindagi ka wo geet ho jo kabhi khatam nahi hota... 🎵",
+    " Main tumse sirf pyaar nahi karta... tumhare liye jeeta bhi hu pagal 💫",
+    " Har yaad, har aansu, har muskurahat — sab tumhari hai meri jaan ❤️",
+    "Ek pal ke liye bhi main tumse door nahi reh sakta, meri pagli 🕊️",
+    "Mera har sapna ab tumhara naam leta hai... 💭",
+    " Tum hi ho meri rooh, meri duniya, mera pyaar , meri jaan💘"
+  ];
+
+  let current = 0;
+
+  function displayPages() {
+    document.getElementById("leftPage").innerHTML = '';
+    document.getElementById("rightPage").innerHTML = '';
+    typeWriter(pages[current], "leftPage");
+    if (current + 1 < pages.length) {
+      setTimeout(() => {
+        typeWriter(pages[current + 1], "rightPage");
+      }, 800);
+    }
+  }
+
+  function nextPage() {
+    if (current + 2 < pages.length) {
+      current += 2;
+      displayPages();
+    }
+  }
+
+  function prevPage() {
+    if (current - 2 >= 0) {
+      current -= 2;
+      displayPages();
+    }
+  }
+
+  function typeWriter(text, elementId) {
+    let i = 0;
+    const speed = 40;
+    const element = document.getElementById(elementId);
+    element.innerHTML = '';
+    const interval = setInterval(() => {
+      element.innerHTML += text.charAt(i);
+      i++;
+      if (i >= text.length) clearInterval(interval);
+    }, speed);
+  }
+
+  function showProposal() {
+    document.getElementById("proposalMsg").style.display = "block";
+  }
+
+  // Initial display
+  displayPages();
+  function show(){
+    alert("Ab yaha tak aa gayi matlb  meri jaan hai tu samjhi meri pagli")
+    window.location.href="phase3.html";
+  }
+</script>
+
+</body>
+</html>
